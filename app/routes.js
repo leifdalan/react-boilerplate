@@ -2,55 +2,31 @@
 // They are all wrapped in the App component, which should contain the navbar etc
 // See http://blog.mxstbr.com/2016/01/react-apps-with-pages for more information
 // about the code splitting business
-import { getAsyncInjectors } from './utils/asyncInjectors';
 
-const errorLoading = (err) => {
-  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
+import React from 'react';
+import { Switch } from 'react-router';
+
+import AsyncRoute from 'routing/AsyncRoute';
+import createHomePageLoader from 'containers/HomePage/loader';
+import createFeaturePageLoader from 'containers/FeaturePage/loader';
+import createNotFoundPageLoader from 'containers/NotFoundPage/loader';
+
+const Routes = ({ store }) => (
+  <Switch>
+    <AsyncRoute
+      exact path="/" load={createHomePageLoader(store)}
+    />
+    <AsyncRoute
+      exact path="/features" load={createFeaturePageLoader(store)}
+    />
+    <AsyncRoute
+      exact path="" load={createNotFoundPageLoader(store)}
+    />
+  </Switch>
+);
+
+Routes.propTypes = {
+  store: React.PropTypes.object,
 };
 
-const loadModule = (cb) => (componentModule) => {
-  cb(null, componentModule.default);
-};
-
-export default function createRoutes(store) {
-  // create reusable async injectors using getAsyncInjectors factory
-  const { injectReducer, injectSagas } = getAsyncInjectors(store);
-
-  return [
-    {
-      path: '/',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('containers/HomePage/reducer'),
-          import('containers/HomePage/sagas'),
-          import('containers/HomePage'),
-        ]);
-
-        const renderRoute = loadModule(cb);
-
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('home', reducer.default);
-          injectSagas(sagas.default);
-
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
-    }, {
-      path: '/features',
-      getComponent(nextState, cb) {
-        import('containers/FeaturePage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
-      },
-    }, {
-      path: '*',
-      getComponent(nextState, cb) {
-        import('containers/NotFoundPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
-      },
-    },
-  ];
-}
+export default Routes;
