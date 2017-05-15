@@ -25,7 +25,7 @@ export default class FeaturePage extends React.Component { // eslint-disable-lin
     return (
       <div>
         <Helmet
-          title="Feature Page"
+          title="eature Page"
           meta={[
             { name: 'description', content: 'Feature page of React.js Boilerplate application' },
           ]}
@@ -56,7 +56,7 @@ export default class FeaturePage extends React.Component { // eslint-disable-lin
             <ListItemTitle>
               <FormattedMessage {...messages.routingHeader} />
             </ListItemTitle>
-            <p>
+            <p>farts
               <FormattedMessage {...messages.routingMessage} />
             </p>
           </ListItem>

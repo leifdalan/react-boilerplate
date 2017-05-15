@@ -8,15 +8,18 @@ import { routerReducer } from 'react-router-redux';
 
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import { createBrowserHistory } from 'history';
+import { connectRouter } from 'connected-react-router/immutable';
 
+const history = createBrowserHistory();
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
 export default function createReducer(asyncReducers) {
-  return combineReducers({
+  return connectRouter(history)(combineReducers({
     route: routerReducer,
     global: globalReducer,
     language: languageProviderReducer,
     ...asyncReducers,
-  });
+  }));
 }

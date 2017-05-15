@@ -23,7 +23,11 @@ import { loadRepos } from '../App/actions';
 import { changeUsername } from './actions';
 import { makeSelectUsername } from './selectors';
 
-export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
+  state = {
+    counter: 0,
+  }
   /**
    * when initial state username is not null, submit the form to load repos
    */
@@ -32,6 +36,8 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       this.props.onSubmitForm();
     }
   }
+
+  updateCounter = () => this.setState({counter: this.state.counter + 1})
 
   render() {
     const { loading, error, repos } = this.props;
@@ -50,7 +56,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           ]}
         />
         <div>
-          <CenteredSection>
+          <CenteredSection>asdf
             <H2>
               <FormattedMessage {...messages.startProjectHeader} />
             </H2>
@@ -79,6 +85,9 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             </Form>
             <ReposList {...reposListProps} />
           </Section>
+          <button onClick={this.updateCounter}>
+            {this.state.counter}
+          </button>
         </div>
       </article>
     );
