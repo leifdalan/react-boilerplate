@@ -122,12 +122,15 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
+const connected = withConnect(HomePage);
 const withReducer = injectReducer({ key: 'home', reducer });
+const reduced = withReducer(connected);
 const withSaga = injectSaga({ key: 'home', saga });
+const sagad = withSaga(reduced);
+export default sagad;
 
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect,
-)(HomePage);
+// export default compose(
+//   withReducer,
+//   withSaga,
+//   withConnect,
+// )(HomePage);

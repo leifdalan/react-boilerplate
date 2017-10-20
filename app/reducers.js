@@ -5,10 +5,12 @@
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
+import createBrowserHistory from 'history/createBrowserHistory';
+import { connectRouter } from 'connected-react-router/immutable';
 
 import globalReducer from 'containers/App/reducer';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-
+const history = createBrowserHistory();
 /*
  * routeReducer
  *
@@ -41,10 +43,10 @@ function routeReducer(state = routeInitialState, action) {
  * Creates the main reducer with the dynamically injected ones
  */
 export default function createReducer(injectedReducers) {
-  return combineReducers({
+  return connectRouter(history)(combineReducers({
     route: routeReducer,
     global: globalReducer,
     language: languageProviderReducer,
     ...injectedReducers,
-  });
+  }));
 }

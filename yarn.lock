@@ -614,11 +614,12 @@ babel-plugin-react-transform@2.0.2:
   dependencies:
     lodash "^4.6.1"
 
-babel-plugin-styled-components@1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.1.4.tgz#b0e6d5bb01059bc7ab9118d3d686f6472ee8e91f"
+babel-plugin-styled-components@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.2.1.tgz#e1593f2a6a0327e2d156695306e60c4dd175866d"
   dependencies:
-    stylis "2.0.0"
+    babel-types "^6.26.0"
+    stylis "^3.2.1"
 
 babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
@@ -1785,6 +1786,13 @@ concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^1.6.0:
     readable-stream "^2.2.2"
     typedarray "^0.0.6"
 
+connected-react-router@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/connected-react-router/-/connected-react-router-4.2.3.tgz#7066a7f83da484ddfa9c353903a6b07d19cbe9e1"
+  dependencies:
+    immutable "^3.8.1"
+    react-router "^4.1.0"
+
 console-browserify@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-browserify/-/console-browserify-1.1.0.tgz#f0241c45730a9fc6323b206dbf38edc741d0bb10"
@@ -2660,7 +2668,7 @@ eslint-config-airbnb-base@12.1.0, eslint-config-airbnb-base@^12.1.0:
   dependencies:
     eslint-restricted-globals "^0.1.1"
 
-eslint-config-airbnb@16.0.1:
+eslint-config-airbnb@16.1.0:
   version "16.1.0"
   resolved "https://registry.yarnpkg.com/eslint-config-airbnb/-/eslint-config-airbnb-16.1.0.tgz#2546bfb02cc9fe92284bf1723ccf2e87bc45ca46"
   dependencies:
@@ -3920,6 +3928,10 @@ imagemin@^5.2.2:
 immutable@3.8.1:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
+
+immutable@^3.8.1:
+  version "3.8.2"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.2.tgz#c2439951455bb39913daf281376f1530e104adf3"
 
 import-inspector@^2.0.0:
   version "2.0.0"
@@ -6611,7 +6623,7 @@ react-router-redux@5.0.0-alpha.6:
     prop-types "^15.5.4"
     react-router "^4.1.1"
 
-react-router@^4.1.1, react-router@^4.2.0:
+react-router@^4.1.0, react-router@^4.1.1, react-router@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.2.0.tgz#61f7b3e3770daeb24062dae3eedef1b054155986"
   dependencies:
@@ -7488,10 +7500,6 @@ styled-components@2.2.1:
     stylis "^3.2.1"
     supports-color "^3.2.3"
 
-stylis@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/stylis/-/stylis-2.0.0.tgz#6785a6546bd73478799a67d49d67086953b50ad5"
-
 stylis@^3.2.1:
   version "3.2.19"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.2.19.tgz#3bfeff425e12935cde5faed4a39de06b1aeb5acb"
@@ -7807,6 +7815,16 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
+typescript-styled-plugin@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/typescript-styled-plugin/-/typescript-styled-plugin-0.1.0.tgz#d563516db7c6955675f71d6169c097e8330d6121"
+  dependencies:
+    vscode-css-languageservice "^2.1.10"
+
+typescript@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.5.3.tgz#df3dcdc38f3beb800d4bc322646b04a3f6ca7f0d"
+
 ua-parser-js@^0.7.9:
   version "0.7.14"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.14.tgz#110d53fa4c3f326c121292bbeac904d2e03387ca"
@@ -8048,6 +8066,21 @@ vm-browserify@0.0.4:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-0.0.4.tgz#5d7ea45bbef9e4a6ff65f95438e0a87c357d5a73"
   dependencies:
     indexof "0.0.1"
+
+vscode-css-languageservice@^2.1.10:
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/vscode-css-languageservice/-/vscode-css-languageservice-2.1.10.tgz#465ca0dddc3c53f498bb353674755329b16a5e6e"
+  dependencies:
+    vscode-languageserver-types "^3.4.0"
+    vscode-nls "^2.0.1"
+
+vscode-languageserver-types@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/vscode-languageserver-types/-/vscode-languageserver-types-3.4.0.tgz#5043ae47ee4ac16af07bb3d0ca561235e0c0d2fa"
+
+vscode-nls@^2.0.1:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vscode-nls/-/vscode-nls-2.0.2.tgz#808522380844b8ad153499af5c3b03921aea02da"
 
 walker@~1.0.5:
   version "1.0.7"

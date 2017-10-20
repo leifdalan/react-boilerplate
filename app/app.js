@@ -12,7 +12,7 @@ import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router/immutable';
 import FontFaceObserver from 'fontfaceobserver';
 import createHistory from 'history/createBrowserHistory';
 
@@ -75,7 +75,7 @@ const render = (messages) => {
           <App />
         </ConnectedRouter>
       </LanguageProvider>
-    </Provider>    
+    </Provider>
   );
 
   if (process.env.production !== 'production') {
@@ -84,7 +84,7 @@ const render = (messages) => {
       <AppContainer>
         {ReactApp}
       </AppContainer>
-    )
+    );
   }
   ReactDOM.render(ReactApp, MOUNT_NODE);
 };
