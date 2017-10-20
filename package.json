@@ -134,6 +134,7 @@
       "import/no-unresolved": 2,
       "import/no-webpack-loader-syntax": 0,
       "import/prefer-default-export": 0,
+      "function-paren-newline": 0,
       "indent": [
         2,
         2,
@@ -311,7 +312,7 @@
     "typescript": "^2.5.3",
     "typescript-styled-plugin": "^0.1.0",
     "url-loader": "0.5.8",
-    "webpack": "3.6.0",
+    "webpack": "3.8.1",
     "webpack-dev-middleware": "1.11.0",
     "webpack-hot-middleware": "2.18.0"
   }

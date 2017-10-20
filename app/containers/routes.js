@@ -1,6 +1,6 @@
 /* eslint-disable global-require, import/no-mutable-exports */
 let routes;
-if (process.env.NODE_ENV === 'production') {
+if (true || process.env.NODE_ENV === 'production') {
   routes = {
     HomePage: require('containers/HomePage/Loadable').default,
     FeaturePage: require('containers/FeaturePage/Loadable').default,
