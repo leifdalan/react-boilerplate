@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import createHistory from 'history/createBrowserHistory';
+
 import 'sanitize.css/sanitize.css';
 
 // Import root app
@@ -67,16 +68,25 @@ const store = configureStore(initialState, history);
 const MOUNT_NODE = document.getElementById('app');
 
 const render = (messages) => {
-  ReactDOM.render(
+  let ReactApp = (
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <App />
         </ConnectedRouter>
       </LanguageProvider>
-    </Provider>,
-    MOUNT_NODE
+    </Provider>    
   );
+
+  if (process.env.production !== 'production') {
+    const { AppContainer } = require('react-hot-loader'); // eslint-disable-line global-require
+    ReactApp = (
+      <AppContainer>
+        {ReactApp}
+      </AppContainer>
+    )
+  }
+  ReactDOM.render(ReactApp, MOUNT_NODE);
 };
 
 if (module.hot) {
@@ -84,7 +94,7 @@ if (module.hot) {
   // modules.hot.accept does not accept dynamic dependencies,
   // have to be constants at compile-time
   module.hot.accept(['./i18n', 'containers/App'], () => {
-    ReactDOM.unmountComponentAtNode(MOUNT_NODE);
+    // ReactDOM.unmountComponentAtNode(MOUNT_NODE);
     render(translationMessages);
   });
 }
