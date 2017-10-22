@@ -17,10 +17,6 @@ export default class FeaturePage extends React.Component { // eslint-disable-lin
 
   // Since state and props are static,
   // there's no need to re-render this component
-  shouldComponentUpdate() {
-    return false;
-  }
-
   render() {
     return (
       <div>

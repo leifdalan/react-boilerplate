@@ -24,6 +24,11 @@ const plugins = [
     exclude: /a\.js|node_modules/, // exclude node_modules
     failOnError: false, // show a warning when there is a circular dependency
   }),
+  new webpack.NormalModuleReplacementPlugin(
+    /Loadable/, (resource) => {
+      resource.request = resource.request.replace(/\/Loadable/, ''); // eslint-disable-line no-param-reassign
+    }
+  ),
 ];
 
 if (dllPlugin) {

@@ -1,9 +1,21 @@
 /**
  * COMMON WEBPACK CONFIGURATION
  */
-
+const os = require('os');
 const path = require('path');
 const webpack = require('webpack');
+const HappyPack = require('happypack');
+const tempDir = path.resolve(__dirname, '..', '.happypack');
+const threadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+const HAPPYPACK_DEFAULTS = {
+  threadPool,
+  verboseWhenProfiling: true,
+  verbose: false,
+};
+
+var HappyPackLoader = (id, loaders) =>
+  new HappyPack(Object.assign({ id, loaders }, HAPPYPACK_DEFAULTS));
+
 
 // Remove this line once the following warning goes away (it was meant for webpack loader authors not users):
 // 'DeprecationWarning: loaderUtils.parseQuery() received a non-string value which can be problematic,
@@ -22,10 +34,9 @@ module.exports = (options) => ({
       {
         test: /\.jsx?$/, // Transform all .js/.jsx files required somewhere with Babel
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: options.babelQuery,
-        },
+        use: [{
+          loader: 'happypack/loader?id=jsx',
+        }],
       },
       {
         // Preprocess our own .css files
@@ -33,17 +44,23 @@ module.exports = (options) => ({
         // for a list of loaders, see https://webpack.js.org/loaders/#styling
         test: /\.css$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: [{
+          loader: 'happypack/loader?id=css',
+        }],
       },
       {
         // Preprocess 3rd party .css files located in node_modules
         test: /\.css$/,
         include: /node_modules/,
-        use: ['style-loader', 'css-loader'],
+        use: [{
+          loader: 'happypack/loader?id=css',
+        }],
       },
       {
         test: /\.(eot|svg|otf|ttf|woff|woff2)$/,
-        use: 'file-loader',
+        use: [{
+          loader: 'happypack/loader?id=file',
+        }],
       },
       {
         test: /\.(jpg|png|gif)$/,
@@ -71,20 +88,23 @@ module.exports = (options) => ({
       },
       {
         test: /\.html$/,
-        use: 'html-loader',
+        use: [{
+          loader: 'happypack/loader?id=html',
+        }],
+
       },
       {
         test: /\.json$/,
-        use: 'json-loader',
+        use: [{
+          loader: 'happypack/loader?id=json',
+        }],
+
       },
       {
         test: /\.(mp4|webm)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-          },
-        },
+        use: [{
+          loader: 'happypack/loader?id=url',
+        }],
       },
     ],
   },
@@ -103,6 +123,20 @@ module.exports = (options) => ({
       },
     }),
     new webpack.NamedModulesPlugin(),
+    HappyPackLoader('jsx', [{
+      loader: 'babel-loader',
+      options: options.babelQuery,
+    }]),
+    HappyPackLoader('css', ['style-loader', 'css-loader']),
+    HappyPackLoader('file', ['file-loader']),
+    HappyPackLoader('html', ['html-loader']),
+    HappyPackLoader('json', ['json-loader']),
+    HappyPackLoader('url', [{
+      loader: 'url-loader',
+      options: {
+        limit: 10000,
+      },
+    }]),
   ]),
   resolve: {
     modules: ['app', 'node_modules'],
